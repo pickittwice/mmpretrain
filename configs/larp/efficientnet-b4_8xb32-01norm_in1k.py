@@ -1,17 +1,9 @@
 _base_ = [
     '../_base_/models/efficientnet_b4.py',
-    '../_base_/datasets/imagenet_bs32.py',
+    '../_base_/datasets/larp_bs32.py',
     '../_base_/schedules/imagenet_bs256.py',
     '../_base_/default_runtime.py',
 ]
-
-# dataset settings
-data_preprocessor = dict(
-    mean=[127.5, 127.5, 127.5],
-    std=[127.5, 127.5, 127.5],
-    # convert image from BGR to RGB
-    to_rgb=True,
-)
 
 train_pipeline = [
     dict(type='LoadImageFromFile'),
@@ -36,8 +28,7 @@ model = dict(
     neck=dict(type='GlobalAveragePooling'),
     head=dict(
         type='LinearClsHead',
-        num_classes=1000,
+        num_classes=2,
         in_channels=1792,
         loss=dict(type='CrossEntropyLoss', loss_weight=1.0),
-        topk=(1, 5),
     ))
