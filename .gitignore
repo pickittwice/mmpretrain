@@ -129,7 +129,6 @@ venv.bak/
 /projects/*/data
 /mmpretrain/.mim
 .DS_Store
-/notebook
 /tmp
 
 # Pytorch
