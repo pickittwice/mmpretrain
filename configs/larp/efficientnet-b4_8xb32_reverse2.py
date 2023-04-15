@@ -37,15 +37,24 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    dataset=dict(pipeline=train_pipeline),
+    dataset=dict(
+        pipeline=train_pipeline,
+        ann_file='meta/reverse2_ann_train.json',
+    ),
     batch_size=16
     )
 val_dataloader = dict(
-    dataset=dict(pipeline=test_pipeline),
+    dataset=dict(
+        pipeline=test_pipeline,
+        ann_file='meta/reverse2_ann_val.json',
+    ),
     batch_size=16
     )
 test_dataloader = dict(
-    dataset=dict(pipeline=test_pipeline),
+    dataset=dict(
+        pipeline=test_pipeline,
+        ann_file='meta/reverse2_ann_val.json',
+    ),
     batch_size=16
     )
 
