@@ -130,6 +130,7 @@ venv.bak/
 /mmpretrain/.mim
 .DS_Store
 /tmp
+/models
 
 # Pytorch
 *.pth
