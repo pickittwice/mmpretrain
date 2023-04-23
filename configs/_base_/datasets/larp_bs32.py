@@ -9,15 +9,32 @@ data_preprocessor = dict(
 
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='RandomResizedCrop', scale=224),
-    dict(type='RandomFlip', prob=0.5, direction='horizontal'),
+    dict(type='Resize', scale=256, keep_ratio=True),
+    dict(type='RandomCrop', crop_size=256, pad_if_needed=True),
+    dict(type='Rotate', 
+         magnitude_level=3,
+         magnitude_range=(0, 30), 
+         magnitude_std='inf',
+         random_negative_prob=0.5,
+         pad_val=0),
+    dict(
+        type='RandomApply',
+        transforms=[
+            dict(
+                type='ColorJitter',
+                brightness=0.4,
+                contrast=0.4,
+                saturation=0.2,
+                hue=0.0)
+        ],
+        prob=0.8),
     dict(type='PackInputs'),
 ]
 
 test_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='ResizeEdge', scale=256, edge='short'),
-    dict(type='CenterCrop', crop_size=224),
+    dict(type='Resize', scale=256, keep_ratio=True),
+    dict(type='RandomCrop', crop_size=256, pad_if_needed=True),
     dict(type='PackInputs'),
 ]
 
